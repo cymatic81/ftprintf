@@ -6,7 +6,7 @@
 #    By: jchapman <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/06 15:59:27 by jchapman          #+#    #+#              #
-#    Updated: 2022/10/14 14:08:43 by jchapman         ###   ########.fr        #
+#    Updated: 2022/10/20 17:06:55 by jchapman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,14 @@ all: $(NAME)
 
 PRINTF_SRCS	=	ft_printf.c \
 				testprintf.c \
+				ft_initflags.c \
+				ft_printformat.c \
+				ft_resetflags.c \
+				ft_subspecifier.c \
+				ft_printfatoi.c \
+				ft_printspecified.c \
+				ft_setflags.c \
+				ft_printchar.c \
 
 PRINTF_OBS = $(PRINTF_SRCS:.c=.o)
 
@@ -32,6 +40,8 @@ libft/libft.a:
 	${CC} -c $(CFLAGS) $< -o $(<:.c=.o)
 
 $(NAME): $(PRINTF_OBS) $(LIBFT)
+	cd libft && $(make) make bonus
+	cp libft/libft.a $(NAME)
 	ar -rcs $(NAME) $(PRINTF_OBS) $(LIBFT)
 
 clean:	

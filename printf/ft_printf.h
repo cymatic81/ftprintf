@@ -6,7 +6,7 @@
 /*   By: jchapman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 15:53:28 by jchapman          #+#    #+#             */
-/*   Updated: 2022/10/13 15:25:46 by jchapman         ###   ########.fr       */
+/*   Updated: 2022/10/20 17:16:50 by jchapman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <stdarg.h>
 # include "libft/libft.h"
 
-typedef struct t_flag
+typedef struct	t_flag
 {
-	char			*format;
+	const char		*format;
 	char			datatype;
 	va_list			args;
 	unsigned int	width;
@@ -30,9 +30,17 @@ typedef struct t_flag
 	unsigned int	hash;
 	unsigned int	space;
 	unsigned int	sign;
-	unsigned int	retlen;	
-}	t_flags;
+	unsigned int	ret;	
+}	t_flag;
 
-int	ft_printf(const char *str);
+void			ft_resetflags(struct t_flag *flags);
+void			ft_setflags(struct t_flag *flags);
+ssize_t			ft_printf(const char *str, ...);
+struct t_flag	*ft_initflags(const char *str);
+ssize_t			ft_printformat(struct t_flag *flags);
+ssize_t			ft_subspecifier(struct t_flag *flags);
+unsigned int	ft_printfatoi(struct t_flag *flags);
+ssize_t			ft_printspecified(struct t_flag *flags);
+ssize_t			ft_printchar(struct t_flag *flags);
 
 #endif

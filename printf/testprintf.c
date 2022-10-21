@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include "ft_printf.h"
-//#include "ft_printf.c"
-//#include "libft/ft_strlen.c"
-
 
 int main()
 {
-	char *a = "Hello";
-	int i = 0;
+	//char	*a = "World";
+	char	b = 'A';
+	ssize_t	i = 0;
+	//unsigned int j = 0;
 
-	i = ft_printf(a);
-	printf("%s is %i characters long.\n", a, i);
-return(0);
+	printf("%zd characters printed to screen.\n", i);
+	i = ft_printf("Hello :%-21c:\n", b);
+	printf("Now there are %zd characters printed to screen.\n", i);
+	return(0);
 }

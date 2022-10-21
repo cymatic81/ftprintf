@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printchar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchapman <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 16:08:20 by jchapman          #+#    #+#             */
-/*   Updated: 2022/10/20 18:15:57 by jchapman         ###   ########.fr       */
+/*   Created: 2022/10/20 15:43:41 by jchapman          #+#    #+#             */
+/*   Updated: 2022/10/21 16:02:16 by jchapman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
-ssize_t	ft_printf(const char *str, ...)
-{
-	struct t_flag	*flags;
-	ssize_t	ret;
 
+ssize_t	ft_printchar(struct t_flag *flags)
+{
+	ssize_t	ret;
+	char	a;
+
+	a = va_arg(flags->args, int);
 	ret = 0;
-	flags = ft_initflags(str);
-	if (!flags)
-		return (0);
-	va_start(flags->args, str);
-	while (flags->format)
+	flags->format++;
+	if (flags->leftjustify == 1)
 	{
-		ret = ret + ft_printformat(flags);
-		if (flags->format[0] == '%' && flags->format[1] != '\0')
-		{
-			ret = ret + ft_subspecifier(flags);
-			ret = ret + ft_printspecified(flags);
-		}
-		else 
-			return (ret);
+		ret = ret + write(1, &a, 1);
+		while (ret < flags->width)
+			ret = ret + write(1, " ", 1);
+		return (ret);
 	}
-	printf("%d\n", flags->leftjustify);
-	va_end(flags->args);
-	free (flags);
+	else
+		while (ret + 1 < flags->width)	
+			ret = ret + write(1, " ", 1);
+		ret = ret + write(1, &a, 1);
 	return (ret);
 }
