@@ -6,7 +6,7 @@
 #    By: jchapman <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/06 15:59:27 by jchapman          #+#    #+#              #
-#    Updated: 2022/10/20 17:06:55 by jchapman         ###   ########.fr        #
+#    Updated: 2022/11/18 14:28:06 by jchapman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,11 @@ NAME = libftprintf.a
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -Iheaders
+CFLAGS = -Wall -Werror -Wextra -Iheaders -g #remove "-g"
 			
 all: $(NAME)
 
 PRINTF_SRCS	=	ft_printf.c \
-				testprintf.c \
 				ft_initflags.c \
 				ft_printformat.c \
 				ft_resetflags.c \
@@ -28,6 +27,12 @@ PRINTF_SRCS	=	ft_printf.c \
 				ft_printspecified.c \
 				ft_setflags.c \
 				ft_printchar.c \
+				ft_printstr.c \
+				ft_printdecimal.c \
+				ft_printfitoa.c \
+				ft_printhex.c \
+				ft_printfxtoa.c \
+				#add testpritf.c here
 
 PRINTF_OBS = $(PRINTF_SRCS:.c=.o)
 
@@ -55,7 +60,7 @@ fclean:	clean
 re:	fclean all clean
 
 test:	re
-	gcc $(NAME) $(LIBFT) testprintf.c
-	./a.out	
 	rm -rf a.out
-
+	rm -rf a.out.dSYM
+	gcc -g $(NAME) $(LIBFT) testprintf.c
+	./a.out	
